@@ -308,12 +308,16 @@ end
 Varies a little from tutorial, user.ex, registration changset needs opts param:
 
 ```elixir
-  def registration_changeset(user, attrs, opts \\ []) do
-    user
-    |> cast(attrs, [:email, :password])
-    |> validate_confirmation(:password, message: "does not match password")
-    |> validate_email()
-    |> validate_password(opts)
-  end
-  ```
+def registration_changeset(user, attrs, opts \\ []) do
+  user
+  |> cast(attrs, [:email, :password])
+  |> validate_confirmation(:password, message: "does not match password")
+  |> validate_email()
+  |> validate_password(opts)
+end
+```
+
+## Registration Workflow
+
+Update workflow, tests for registration confirmation
   
