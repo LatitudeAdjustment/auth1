@@ -285,3 +285,35 @@ end
 Looks like there may be some improvements coming for Phoenix timestamps.
 
 https://github.com/aaronrenner/phx_gen_auth/issues/105
+
+## Secure Page
+
+We follow the tutorial and make a page folder and secure page.
+
+```bash
+mkdir apps/auth_web/lib/auth_web/templates/page
+touch apps/auth_web/lib/auth_web/templates/page/secure.html.eex
+```
+
+Also need PageView
+
+```elixir
+defmodule AuthWeb.PageView do
+  use AuthWeb, :view
+end
+```
+
+## Add Password Confirmation
+
+Varies a little from tutorial, user.ex, registration changset needs opts param:
+
+```elixir
+  def registration_changeset(user, attrs, opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_email()
+    |> validate_password(opts)
+  end
+  ```
+  

@@ -32,6 +32,7 @@ defmodule Auth.Accounts.User do
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password])
+    |> validate_confirmation(:password, message: "does not match password")
     |> validate_email()
     |> validate_password(opts)
   end

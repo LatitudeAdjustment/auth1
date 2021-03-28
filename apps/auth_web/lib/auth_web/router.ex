@@ -68,6 +68,12 @@ defmodule AuthWeb.Router do
   end
 
   scope "/", AuthWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    get "/secured_page", PageController, :secure
+  end
+
+  scope "/", AuthWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
