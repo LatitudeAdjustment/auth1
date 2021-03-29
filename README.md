@@ -373,6 +373,13 @@ UPDATE "users" SET "locked_at" = $1, "updated_at" = $2 WHERE "id" = $3 [nil, ~N[
  >}
 ```
 
+## Add Bamboo
+
+We then added Bamboo 2.0 for email notification replacement of console based notifier.
+
+There was a small gotcha on Mailer.deliver_now!().
+The tuple version requires Mailer.deliver_now!(), with exclamation point.
+
 ## Roadmap
 
 ### User confirmed_at
@@ -387,5 +394,5 @@ Sign In, Log in
 Sign Out, Log out  
 Sign Up, Register  
 
-Shouldn't both words be capitalized?
+Shouldn't both words in these phrases be capitalized?
   
