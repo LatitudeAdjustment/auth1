@@ -42,7 +42,8 @@ defmodule Auth.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
       {:bamboo, "~> 2.0"},
-      {:bamboo_smtp, "~> 4.0"}
+      {:bamboo_smtp, "~> 4.0"},
+      {:tzdata, "~> 1.1"}
     ]
   end
 

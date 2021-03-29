@@ -403,19 +403,28 @@ export SMTP_USERNAME=
 export SMTP_PASSWORD=
 export SMTP_PORT=
 
+## Add Timezones
+
+Add Elixir timezone database, tzdata.
+
+https://hexdocs.pm/tzdata/readme.html
+
+https://github.com/lau/tzdata
+
+## Add DateTime Utilities
+
+Add DateTimeUtils.ex and tests.
+
+Where exactly do utility modules belong in an umbrella application/project?
+
 ## Roadmap
-
-### User confirmed_at
-
-Change User confirmed_at field and related functions from :naive_datetime to
-:utc_datetime_usec.
 
 ### Preferences
 
-Dowe prefer Sign In to Log In?
-Sign In, Log in  
-Sign Out, Log out  
-Sign Up, Register  
+Do we prefer Sign In to Log In?
+- Sign In, Log in  
+- Sign Out, Log out  
+- Sign Up, Register  
 
 Shouldn't both words in these phrases be capitalized?
   
