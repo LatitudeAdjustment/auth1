@@ -33,6 +33,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# In your config/config.exs file
+if Mix.env() == :test do
+  config :auth, Auth.Mailer, adapter: Auth.SMTPTestAdapter
+end
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -1,4 +1,4 @@
-# Actl
+# Auth
 
 Phoenix LiveView Umbrella application built using Phoenix authentication
 generator.
@@ -375,10 +375,33 @@ UPDATE "users" SET "locked_at" = $1, "updated_at" = $2 WHERE "id" = $3 [nil, ~N[
 
 ## Add Bamboo
 
-We then added Bamboo 2.0 for email notification replacement of console based notifier.
+We then added Bamboo 2.0.2 for email notification replacement of console based notifier.
 
 There was a small gotcha on Mailer.deliver_now!().
 The tuple version requires Mailer.deliver_now!(), with exclamation point.
+
+https://hexdocs.pm/bamboo/readme.html
+
+https://github.com/thoughtbot/bamboo
+
+## Add Bamboo SMTP
+
+https://github.com/fewlinesco/bamboo_smtp
+
+UserNotifier, the following address wil not work.   
+
+@from_address "that-auth-app@example.com"
+
+So we used:
+
+@from_address "no-reply@foobarco.com"
+
+Environment variables
+
+export SMTP_DOMAIN=
+export SMTP_USERNAME=
+export SMTP_PASSWORD=
+export SMTP_PORT=
 
 ## Roadmap
 

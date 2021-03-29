@@ -76,4 +76,20 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix, :stacktrace_depth, 20
 
 # Bamboo dev configuration
-config :auth, Auth.Mailer, adapter: Bamboo.LocalAdapter
+config :auth, Auth.Mailer,
+  adapter: Bamboo.LocalAdapter
+
+# Bamboo dev SMTP Configuration, overrides above
+config :auth, Auth.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: {:system, "SMTP_DOMAIN"},
+  hostname: {:system, "SMTP_DOMAIN"},
+  port: {:system, "SMTP_PORT"},
+  username: {:system, "SMTP_USERNAME"},
+  password: {:system, "SMTP_PASSWORD"},
+  tls: :if_available,
+  allowed_tls_versions: [:"tlsv1", :"tlsv1.1", :"tlsv1.2"],
+  ssl: true,
+  retries: 1,
+  no_mx_lookups: false,
+  auth: :always

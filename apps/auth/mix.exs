@@ -41,7 +41,8 @@ defmodule Auth.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
-      {:bamboo, "~> 2.0"}
+      {:bamboo, "~> 2.0"},
+      {:bamboo_smtp, "~> 4.0"}
     ]
   end
 

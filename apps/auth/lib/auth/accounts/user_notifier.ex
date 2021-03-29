@@ -2,7 +2,25 @@ defmodule Auth.Accounts.UserNotifier do
   import Bamboo.Email
   alias Auth.Mailer
 
-  @from_address "that-auth-app@example.com"
+  @from_address "no-reply@foobar.com"
+
+  def deliver_welcome(to) do
+    email =
+      welcome_email(to)
+      |> Mailer.deliver_now!()
+
+    {:ok, email}
+  end
+
+  defp welcome_email(to) do
+    new_email(
+      from: @from_address,
+      to: to,
+      subject: "Welcome!",
+      text_body: "Welcome to the Auth app",
+      html_body: "<strong>Welcome to the Auth app</strong>"
+    )
+  end
 
   defp deliver(to, subject, text_body, html_body) do
     email =
