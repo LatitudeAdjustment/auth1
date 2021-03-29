@@ -410,12 +410,37 @@ So we used:
 
 @from_address "no-reply@foobarco.com"
 
-Environment variables
+The following variables are required to run Bamboo SMTP in development
+environment.
 
 export SMTP_DOMAIN=
 export SMTP_USERNAME=
 export SMTP_PASSWORD=
 export SMTP_PORT=
+
+The iex REPL may be used to send an email.
+
+```elixir
+iex> Auth.Accounts.UserNotifier.deliver_welcome("someperson@email.com")
+[debug] Sending email with Bamboo.SMTPAdapter:
+
+%Bamboo.Email{assigns: %{}, attachments: [], bcc: [], cc: [], from: {nil, "no-reply@foobar.com"}, headers: %{}, html_body: "<strong>Welcome to the Auth app</strong>", private: %{}, subject: "Welcome!", text_body: "Welcome to the Auth app", to: [nil: "someperson@email.com"]} 
+
+{:ok,
+ %Bamboo.Email{
+   assigns: %{},
+   attachments: [],
+   bcc: [],
+   cc: [],
+   from: {nil, "no-reply@foobar.com"},
+   headers: %{},
+   html_body: "<strong>Welcome to the Auth app</strong>",
+   private: %{},
+   subject: "Welcome!",
+   text_body: "Welcome to the Auth app",
+   to: [nil: "someperson@email.com"]
+ }}
+```
 
 ## Add Timezones
 
@@ -431,7 +456,17 @@ Add DateTimeUtils.ex and tests.
 
 Where exactly do utility modules belong in an umbrella application/project?
 
+From the apps folder we created a new application named utils.
+
+```bash
+mix new utils
+```
+
 ## Roadmap
+
+### More Tests
+
+Bamboo SMTP
 
 ### Preferences
 
@@ -440,5 +475,5 @@ Do we prefer Sign In to Log In?
 - Sign Out, Log out
 - Sign Up, Register
 
-Shouldn't both words in these phrases be capitalized?
+Shouldn't all/both words in these phrases be capitalized when presented to user?
   
