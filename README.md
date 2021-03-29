@@ -1,12 +1,12 @@
 # Auth
 
-Phoenix LiveView Umbrella application built using Phoenix authentication
+Phoenix Umbrella application (with LiveView) built using Phoenix authentication
 generator.
 
 ## Purpose(s)
 
 Highlights use of phx.gen.auth v0.7.0.
-Wlll likely be incorporated into Phoenix Framework 1.6.
+Likely to be incorporated into Phoenix Framework 1.6.
 
 Intended as reference, basis/foundation for future projects.
 
@@ -21,9 +21,19 @@ Perhaps we should set up watching on these repos.
 - Elixir/Erlang
 - Phoenix Framework v1.5.8
 
-## Tutorial Used
+## Credits
 
-Built from the following excellent tutorial from Nick Riebeek, Experimenting with Code:
+Thanks to José Valim, Aaron Renner for creating the Phoenix authentication
+generator.
+
+https://hexdocs.pm/phx_gen_auth/overview.html
+
+https://github.com/aaronrenner/phx_gen_auth
+
+### Tutorial Used
+
+Thanks also to Nick Riebeek, "Experimenting with Code", for his excellent
+tutorial used to build this project.
 
 [Phoenix Authentication with Phx.Gen.Auth - Part 1](https://experimentingwithcode.com/phoenix-authentication-with-phx-gen-auth-part-1/)
 
@@ -159,7 +169,7 @@ Generated phx_gen_auth app
 ```
 
 Phoenix is smart.
-Where are we? 
+It won't let us run the generator in the wrong folder.
 
 ```
 $ pwd
@@ -172,7 +182,7 @@ Let's try non-web application.
 $ cd apps/auth
 ```
 
-Let's just use the same context for now.
+Let's just use the same context for now.  
 "Naming is hard but renaming should not be."
 
 ```bash
@@ -247,12 +257,13 @@ project.
 ## Migrations
 
 Let's mot migrate just yet.
+We would like to change the timestamp type first.
 
 ### Migrations - Timestamps
 
 Before we run migrations we want to specify microseconds.
 
-The User schema and functions yhay related to confirmed_at will also have to be
+The User schema and functions that related to confirmed_at will also have to be
 changed.
 
 ```elixir
@@ -327,8 +338,11 @@ Update workflow, tests for registration confirmation
 
 ## Lock/Unlock User
 
+Eventually this will likely be part of an administration interface.
+For now we can achive this via iex.
+
 ```elixir
-iex(> Auth.Accounts.get_user_by_email("bob@example.com") |> Auth.Accounts.lock_user() 
+iex> Auth.Accounts.get_user_by_email("bob@example.com") |> Auth.Accounts.lock_user() 
 [debug] QUERY OK source="users" db=53.9ms queue=1.3ms idle=1076.4ms
 SELECT u0."id", u0."email", u0."hashed_password", u0."confirmed_at", u0."locked_at", u0."inserted_at", u0."updated_at" FROM "users" AS u0 WHERE (u0."email" = $1) ["bob@example.com"]
 [debug] QUERY OK db=0.3ms idle=1145.9ms
@@ -422,9 +436,9 @@ Where exactly do utility modules belong in an umbrella application/project?
 ### Preferences
 
 Do we prefer Sign In to Log In?
-- Sign In, Log in  
-- Sign Out, Log out  
-- Sign Up, Register  
+- Sign In, Log in
+- Sign Out, Log out
+- Sign Up, Register
 
 Shouldn't both words in these phrases be capitalized?
   
