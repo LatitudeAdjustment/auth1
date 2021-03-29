@@ -23,7 +23,7 @@ Perhaps we should set up watching on these repos.
 
 ## Credits
 
-Thanks to José Valim, Aaron Renner for creating the Phoenix authentication
+Thanks to José Valim, Aaron Renner and crew for creating the Phoenix authentication
 generator.
 
 https://hexdocs.pm/phx_gen_auth/overview.html
@@ -402,7 +402,7 @@ https://github.com/thoughtbot/bamboo
 
 https://github.com/fewlinesco/bamboo_smtp
 
-UserNotifier, the following address wil not work.   
+UserNotifier, the following address wil not work.
 
 @from_address "that-auth-app@example.com"
 
