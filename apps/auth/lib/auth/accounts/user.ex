@@ -8,7 +8,7 @@ defmodule Auth.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
 
-    field :confirmed_at, :naive_datetime
+    field :confirmed_at, :utc_datetime_usec
     field :locked_at, :utc_datetime_usec
 
     timestamps()
@@ -109,8 +109,7 @@ defmodule Auth.Accounts.User do
   Confirms the account by setting `confirmed_at`.
   """
   def confirm_changeset(user) do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
-    change(user, confirmed_at: now)
+    change(user, confirmed_at: DateTime.utc_now())
   end
 
   @doc """
