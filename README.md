@@ -248,9 +248,12 @@ project.
 
 Let's mot migrate just yet.
 
-### Timestamps
+### Migrations - Timestamps
 
 Before we run migrations we want to specify microseconds.
+
+The User schema and functions yhay related to confirmed_at will also have to be
+changed.
 
 ```elixir
 defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
@@ -305,7 +308,8 @@ end
 
 ## Add Password Confirmation
 
-Varies a little from tutorial, user.ex, registration changset needs opts param:
+Varies a little from tutorial, user.ex, registration changeset needs opts
+param:
 
 ```elixir
 def registration_changeset(user, attrs, opts \\ []) do
@@ -320,4 +324,68 @@ end
 ## Registration Workflow
 
 Update workflow, tests for registration confirmation
+
+## Lock/Unlock User
+
+```elixir
+iex(> Auth.Accounts.get_user_by_email("bob@example.com") |> Auth.Accounts.lock_user() 
+[debug] QUERY OK source="users" db=53.9ms queue=1.3ms idle=1076.4ms
+SELECT u0."id", u0."email", u0."hashed_password", u0."confirmed_at", u0."locked_at", u0."inserted_at", u0."updated_at" FROM "users" AS u0 WHERE (u0."email" = $1) ["bob@example.com"]
+[debug] QUERY OK db=0.3ms idle=1145.9ms
+begin []
+[debug] QUERY OK db=0.8ms
+UPDATE "users" SET "locked_at" = $1, "updated_at" = $2 WHERE "id" = $3 [~U[2021-03-29 02:29:07.915301Z], ~N[2021-03-29 02:29:07], 1]
+[debug] QUERY OK source="users_tokens" db=0.6ms
+DELETE FROM "users_tokens" AS u0 WHERE (u0."user_id" = $1) [1]
+[debug] QUERY OK db=26.7ms
+commit []
+{:ok,
+ #Auth.Accounts.User<
+   __meta__: #Ecto.Schema.Metadata<:loaded, "users">,
+   confirmed_at: nil,
+   email: "bob@example.com",
+   hashed_password: "$2b$12$.yePIrjSAaaQ791J8hZbrOZ0p.iEKyjR2WEBQziPCwlZQl1t56N6i",
+   id: 1,
+   inserted_at: ~N[2021-03-28 19:17:48],
+   locked_at: ~U[2021-03-29 02:29:07.915301Z],
+   updated_at: ~N[2021-03-29 02:29:07],
+   ...
+ >}
+```
+
+```elixir
+iex> Auth.Accounts.get_user_by_email("bob@example.com") |> Auth.Accounts.unlock_user()
+[debug] QUERY OK source="users" db=0.8ms idle=1071.2ms
+SELECT u0."id", u0."email", u0."hashed_password", u0."confirmed_at", u0."locked_at", u0."inserted_at", u0."updated_at" FROM "users" AS u0 WHERE (u0."email" = $1) ["bob@example.com"]
+[debug] QUERY OK db=1.2ms queue=0.4ms idle=1072.4ms
+UPDATE "users" SET "locked_at" = $1, "updated_at" = $2 WHERE "id" = $3 [nil, ~N[2021-03-29 02:32:18], 1]
+{:ok,
+ #Auth.Accounts.User<
+   __meta__: #Ecto.Schema.Metadata<:loaded, "users">,
+   confirmed_at: ~N[2021-03-29 02:30:57],
+   email: ""bob@example.com"",
+   hashed_password: "$2b$12$.yePIrjSAaaQ791J8hZbrOZ0p.iEKyjR2WEBQziPCwlZQl1t56N6i",
+   id: 1,
+   inserted_at: ~N[2021-03-28 19:17:48],
+   locked_at: nil,
+   updated_at: ~N[2021-03-29 02:32:18],
+   ...
+ >}
+```
+
+## Roadmap
+
+### User confirmed_at
+
+Change User confirmed_at field and related functions from :naive_datetime to
+:utc_datetime_usec.
+
+### Preferences
+
+Dowe prefer Sign In to Log In?
+Sign In, Log in  
+Sign Out, Log out  
+Sign Up, Register  
+
+Shouldn't both words be capitalized?
   

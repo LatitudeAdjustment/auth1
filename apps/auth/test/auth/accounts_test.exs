@@ -42,6 +42,15 @@ defmodule Auth.AccountsTest do
       assert {:ok, %User{id: ^id}} =
         Accounts.get_user_by_email_and_password(user.email, valid_user_password())
     end
+
+    test "does not return the user if they have been locked" do
+      user = user_fixture()
+
+      Accounts.lock_user(user)
+
+      assert {:error, :user_locked} ==
+               Accounts.get_user_by_email_and_password(user.email, valid_user_password())
+    end
   end
 
   describe "get_user!/1" do
@@ -525,6 +534,40 @@ defmodule Auth.AccountsTest do
   describe "inspect/2" do
     test "does not include password" do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
+    end
+  end
+
+  describe "block_user/1" do
+    setup do
+      user = user_fixture()
+      token = Accounts.generate_user_session_token(user)
+
+      %{
+        user: user,
+        token: token
+      }
+    end
+
+    test "sets locked_at and removes any tokens belonging to the user", %{user: user, token: token} do
+      assert {:ok, user} = Accounts.lock_user(user)
+
+      refute user.locked_at == nil
+      refute Accounts.get_user_by_session_token(token)
+    end
+  end
+
+  describe "unlock_user/1" do
+    setup do
+      {:ok, user} =
+        user_fixture()
+        |> Accounts.lock_user()
+
+      %{user: user}
+    end
+
+    test "sets the is_blocked flag to false", %{user: user} do
+      assert {:ok, user} = Accounts.unlock_user(user)
+      assert user.locked_at == nil
     end
   end
 end

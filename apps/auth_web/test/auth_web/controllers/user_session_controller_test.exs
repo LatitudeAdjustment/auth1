@@ -95,6 +95,27 @@ defmodule AuthWeb.UserSessionControllerTest do
       assert response =~ "<h1>Log in</h1>"
       assert response =~ "Please confirm your email before signing in.  An email confirmation link has been sent to you."
     end
+
+    test "emits error message when account is locked", %{conn: conn} do
+      {:ok, user} =
+        user_fixture()
+        |> Auth.Accounts.lock_user()
+
+      conn =
+        post(conn, Routes.user_session_path(conn, :create), %{
+          "user" => %{
+            "email" => user.email,
+            "password" => valid_user_password(),
+            "remember_me" => "true"
+          }
+        })
+
+      response = html_response(conn, 200)
+      assert response =~ "<h1>Log in</h1>"
+
+      assert response =~
+               "Your account has been locked, please contact an administrator."
+    end
   end
 
   describe "DELETE /users/log_out" do

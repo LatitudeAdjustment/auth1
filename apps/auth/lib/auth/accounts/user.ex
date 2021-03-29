@@ -7,7 +7,9 @@ defmodule Auth.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
+
     field :confirmed_at, :naive_datetime
+    field :locked_at, :utc_datetime_usec
 
     timestamps()
   end
@@ -112,6 +114,17 @@ defmodule Auth.Accounts.User do
   end
 
   @doc """
+  A user changeset for blocking / unblocking a user.
+  """
+  def lock_user_changeset(user, should_lock?) when should_lock? == true do
+    change(user, locked_at: DateTime.utc_now())
+  end
+
+  def lock_user_changeset(user, should_lock?) when should_lock? == false do
+    change(user, locked_at: nil)
+  end
+
+  @doc """
   Verifies the password.
 
   If there is no user or the user doesn't have a password, we call
@@ -139,4 +152,6 @@ defmodule Auth.Accounts.User do
   end
 
   def is_confirmed?(user), do: user.confirmed_at != nil
+
+  def is_locked?(user), do: user.locked_at != nil
 end
