@@ -117,8 +117,8 @@ Unchanged:
   telemetry_poller 0.5.1
 ```
 
-Add latest generator (release v0.7.0) to our mix file.
-The mix file that contains Phoenix framework (auth_web not auth).
+Add latest generator (release v0.7.0) to the mix file that contains Phoenix
+framework (auth_web not auth).
 
 ```bash
 $ mix deps.get
@@ -183,7 +183,8 @@ Let's try non-web application.
 $ cd apps/auth
 ```
 
-Let's just use the same context as the documentation and tutorial for now.
+For now let's use the context name "Accounts", matching the documentation and
+tutorial.
 We can always change it later.
 "Naming is hard but renaming should not be."
 
@@ -258,15 +259,11 @@ project.
 
 ## Migrations
 
-Let's mot migrate just yet.
-We would like to change the timestamp type first.
+We would like to change the timestamp type first before running the migration.
 
 ### Migrations - Timestamps
 
 Before we run migrations we want to specify microseconds.
-
-The User schema and functions that related to confirmed_at will also have to be
-changed.
 
 ```elixir
 defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
@@ -297,6 +294,9 @@ defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
   end
 end
 ```
+
+The User schema and functions that related to confirmed_at will also have to be
+changed.
 
 Looks like there may be some improvements coming for Phoenix timestamps.
 
