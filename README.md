@@ -5,20 +5,21 @@ generator.
 
 ## Purpose(s)
 
-Highlights use of phx.gen.auth v0.7.0.
+- Highlights the use of Phoenix authentication generator, phx.gen.auth v0.7.0.
 
 The generator adds basic authentication to a Phoenix application greatly
-streamlining and standardizing this aspect of building a working application.
+streamlining and standardizing creation of a working application.
 
-Likely to be incorporated into Phoenix Framework 1.6.
+The Phoenix authentication generator is to be incorporated into the Phoenix Framework v1.6.
 
-Intended as reference, basis/foundation for future projects.
+This project and repository is intended as a reference and a basis/foundation
+for future projects.
 
 The plan is to update to latest/greatest as new component releases become
 available, especially Phoenix framework, Phoenix authentication generator
 and Phoenix LiveView.  
 
-Perhaps we should set up watching on these repos.
+Perhaps we should set up watches on these repos.
 
 ## Prerequisites
 
@@ -55,6 +56,16 @@ Nick adds the following:
 - Email confirmation via Bamboo
 
 - Unit test updates, additions
+
+I add:
+
+- Bamboo SMTP
+
+- Timestamps in milliseconds
+
+- Time zones database
+
+- Date and time utilities
 
 ## Initial Creation
 
@@ -271,6 +282,13 @@ We would like to make a change before running the migration.
 ### Migrations - Timestamps
 
 We want to specify microseconds in all timestamps.
+
+This article provides a very good explanation of UTC timestamps in Phoenix Ecto
+and use of microseconds in Postgres:
+
+http://www.creativedeletion.com/2019/06/17/utc-timestamps-in-ecto.html
+
+We change all occurances to :utc_datetime_usec as follows:
 
 ```elixir
 defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
