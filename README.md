@@ -46,7 +46,7 @@ tutorial used to build this project.
 
 Nick adds the following:  
 
-- Secure page for testing http://localhost:4000/secured_page
+- Secure page for testing
 
 - Password confirmation on registration  
 
@@ -326,6 +326,10 @@ defmodule AuthWeb.PageView do
 end
 ```
 
+The secured page link:
+
+http://localhost:4000/secured_page
+
 ## Add Password Confirmation
 
 Varies a little from tutorial, user.ex, registration changeset needs opts
@@ -422,10 +426,12 @@ So we used:
 The following variables are required to run Bamboo SMTP in development
 environment.
 
+```bash
 export SMTP_DOMAIN=
 export SMTP_USERNAME=
 export SMTP_PASSWORD=
 export SMTP_PORT=
+```
 
 The iex REPL may be used to send an email.
 
