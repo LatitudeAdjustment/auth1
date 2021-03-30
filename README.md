@@ -6,13 +6,18 @@ generator.
 ## Purpose(s)
 
 Highlights use of phx.gen.auth v0.7.0.
+
+The generator adds basic authentication to a Phoenix application greatly
+streamlining and standardizing this aspect of building a working application.
+
 Likely to be incorporated into Phoenix Framework 1.6.
 
 Intended as reference, basis/foundation for future projects.
 
 The plan is to update to latest/greatest as new component releases become
 available, especially Phoenix framework, Phoenix authentication generator
-and Phoenix LiveView.
+and Phoenix LiveView.  
+
 Perhaps we should set up watching on these repos.
 
 ## Prerequisites
@@ -32,7 +37,7 @@ https://github.com/aaronrenner/phx_gen_auth
 
 ### Tutorial Used
 
-Thanks also to Nick Riebeek, "Experimenting with Code", for his excellent
+Special thanks also to Nick Riebeek, "Experimenting with Code", for his excellent
 tutorial used to build this project.
 
 [Phoenix Authentication with Phx.Gen.Auth - Part 1](https://experimentingwithcode.com/phoenix-authentication-with-phx-gen-auth-part-1/)
@@ -68,7 +73,7 @@ cd auth
 
 ## Add Generator
 
-Is generator part of Phoenix yet?
+We can check to see if the generator is part of Phoenix.
 
 ```bash
 $ mix phx.gen.auth Accounts User users
@@ -78,8 +83,9 @@ Generated auth_web app
 ** (Mix) The task "phx.gen.auth" could not be found. Did you mean "phx.gen.html"?
 ```
 
-Not yet, looking forward to 1.6.
-Verify dependencies.
+Not just yet, looking forward to release 1.6!  
+
+Let's verify dependencies to see if phx_gen_auth is there.
 
 ```bash
 $ mix deps.get
@@ -117,7 +123,7 @@ Unchanged:
   telemetry_poller 0.5.1
 ```
 
-Add latest generator (release v0.7.0) to the mix file that contains Phoenix
+We add the latest generator (phx_gen_auth v0.7.0) to the mix file that contains Phoenix
 framework (auth_web not auth).
 
 ```bash
@@ -159,7 +165,7 @@ New:
 * Getting phx_gen_auth (Hex package)
 ```
 
-Let's try again
+Let's try again.
 
 ```bash
 $ mix phx.gen.auth Accounts User users
@@ -185,8 +191,9 @@ $ cd apps/auth
 
 For now let's use the context name "Accounts", matching the documentation and
 tutorial.
-We can always change it later.
-"Naming is hard but renaming should not be."
+We can always change it later.  
+
+Naming is hard but renaming should not be.
 
 ```bash
 $ mix phx.gen.auth Accounts User users
@@ -259,11 +266,11 @@ project.
 
 ## Migrations
 
-We would like to change the timestamp type first before running the migration.
+We would like to make a change before running the migration.
 
 ### Migrations - Timestamps
 
-Before we run migrations we want to specify microseconds.
+We want to specify microseconds in all timestamps.
 
 ```elixir
 defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
@@ -295,7 +302,7 @@ defmodule Auth.Repo.Migrations.CreateUsersAuthTables do
 end
 ```
 
-The User schema and functions that related to confirmed_at will also have to be
+The User schema and functions that relate to confirmed_at will also have to be
 changed.
 
 Looks like there may be some improvements coming for Phoenix timestamps.
@@ -341,7 +348,7 @@ Update workflow, tests for registration confirmation
 ## Lock/Unlock User
 
 Eventually this will likely be part of an administration interface.
-For now we can achive this via iex.
+For now we can achieve this via iex.
 
 ```elixir
 iex> Auth.Accounts.get_user_by_email("bob@example.com") |> Auth.Accounts.lock_user() 
@@ -404,7 +411,7 @@ https://github.com/thoughtbot/bamboo
 
 https://github.com/fewlinesco/bamboo_smtp
 
-UserNotifier, the following address wil not work.
+UserNotifier, the following address will not work.
 
 @from_address "that-auth-app@example.com"
 
