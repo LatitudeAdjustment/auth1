@@ -68,7 +68,7 @@ cd auth
 
 ## Add Generator
 
-Is generator part of Phoenix?
+Is generator part of Phoenix yet?
 
 ```bash
 $ mix phx.gen.auth Accounts User users
@@ -78,6 +78,7 @@ Generated auth_web app
 ** (Mix) The task "phx.gen.auth" could not be found. Did you mean "phx.gen.html"?
 ```
 
+Not yet, looking forward to 1.6.
 Verify dependencies.
 
 ```bash
@@ -117,7 +118,7 @@ Unchanged:
 ```
 
 Add latest generator (release v0.7.0) to our mix file.
-The one that contains Phoenix framework.
+The mix file that contains Phoenix framework (auth_web not auth).
 
 ```bash
 $ mix deps.get
@@ -182,7 +183,8 @@ Let's try non-web application.
 $ cd apps/auth
 ```
 
-Let's just use the same context for now.  
+Let's just use the same context as the documentation and tutorial for now.
+We can always change it later.
 "Naming is hard but renaming should not be."
 
 ```bash
