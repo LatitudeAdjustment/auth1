@@ -5,7 +5,7 @@ generator.
 
 ## Purpose(s)
 
-Highlights use of phx.gen.auth v0.7.0.
+Highlights use of Phx.Gen.Auth v0.7.0.
 Likely to be incorporated into Phoenix Framework 1.6.
 
 Intended as reference, basis/foundation for future projects.
@@ -61,6 +61,8 @@ Auth is a Phoenix Umbrella (--umbrella flag), LiveView (--live flag) application
 mix phx.new auth --umbrella --live
 ```
 
+The folder name auth is preferred to auth_umbrella.
+
 ```bash
 mv auth_umbrella auth
 cd auth
@@ -68,7 +70,7 @@ cd auth
 
 ## Add Generator
 
-Is generator part of Phoenix yet?
+Check to see if auth generator part of Phoenix.
 
 ```bash
 $ mix phx.gen.auth Accounts User users
@@ -473,9 +475,15 @@ Bamboo SMTP
 ### Preferences
 
 Do we prefer Sign In to Log In?
+
 - Sign In, Log in
 - Sign Out, Log out
 - Sign Up, Register
 
 Shouldn't all/both words in these phrases be capitalized when presented to user?
-  
+
+## Repo Name
+
+We are using phx_gen_auth which is the same as the Phoenix generator, not ideal.
+
+How about auth1 or similar?

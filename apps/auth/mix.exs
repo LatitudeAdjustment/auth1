@@ -38,11 +38,12 @@ defmodule Auth.MixProject do
     [
       {:bcrypt_elixir, "~> 2.0"},
       {:phoenix_pubsub, "~> 2.0"},
-      {:ecto_sql, "~> 3.4"},
+      # {:ecto_sql, "~> 3.4"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
-      {:bamboo, "~> 2.0"},
-      {:bamboo_smtp, "~> 4.0"},
+      {:bamboo, "~> 2.1.0"},
+      {:bamboo_smtp, "~> 4.0.1"},
       {:tzdata, "~> 1.1"}
     ]
   end
