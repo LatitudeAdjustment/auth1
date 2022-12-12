@@ -484,6 +484,4 @@ Shouldn't all/both words in these phrases be capitalized when presented to user?
 
 ## Repo Name
 
-We are using phx_gen_auth which is the same as the Phoenix generator, not ideal.
-
-How about auth1 or similar?
+Renamed from phx_gen_auth (which is the same as the Phoenix generator) to auth1.
